@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ctxpack"
+version = "0.1.0"
+description = "Token-budget-aware context packing for RAG: relevance + diversity (MMR) + dedup + citations, zero dependencies."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Rooma Siddiqui" }]
+keywords = ["rag", "llm", "context-window", "retrieval", "mmr", "bm25", "prompt-engineering"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+claude = ["anthropic>=1.0"]
+dev = ["pytest>=8", "ruff>=0.17,<0.18"]
+
+[project.scripts]
+ctxpack = "ctxpack.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/roomeesyncss/ctxpack"
+Issues = "https://github.com/roomeesyncss/ctxpack/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ctxpack"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
